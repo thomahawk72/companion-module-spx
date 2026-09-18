@@ -12,7 +12,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'play' }]
+			actions: [{ action: 'play' }],
 		},
 		{
 			category: 'Playback',
@@ -24,7 +24,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'stop' }]
+			actions: [{ action: 'stop' }],
 		},
 		{
 			category: 'Playback',
@@ -36,7 +36,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'continue' }]
+			actions: [{ action: 'continue' }],
 		},
 		{
 			category: 'Playback',
@@ -48,7 +48,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'stopAllLayers' }]
+			actions: [{ action: 'stopAllLayers' }],
 		},
 		{
 			category: 'Navigation',
@@ -60,7 +60,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'focusFirst' }]
+			actions: [{ action: 'focusFirst' }],
 		},
 		{
 			category: 'Navigation',
@@ -72,7 +72,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'focusNext' }]
+			actions: [{ action: 'focusNext' }],
 		},
 		{
 			category: 'Navigation',
@@ -84,7 +84,7 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'focusPrevious' }]
+			actions: [{ action: 'focusPrevious' }],
 		},
 		{
 			category: 'Navigation',
@@ -96,16 +96,11 @@ module.exports.initPresets = function (instance) {
 				color: '16777215',
 				bgcolor: this.rgb(0, 0, 0),
 			},
-			actions: [{ action: 'focusLast' }]
+			actions: [{ action: 'focusLast' }],
 		},
-
-
 	]
 
-	return [
-		...presets,
-		...rundownPlay(this.rundownItems)
-	]
+	return [...presets, ...rundownPlay(this.rundownItems)]
 }
 
 function rundownPlay(rundownItems) {
@@ -115,36 +110,37 @@ function rundownPlay(rundownItems) {
 	return rundownItems.map((item) => {
 		return {
 			category: 'Play manual Rundown Items',
-			label: "Play " + item.title,
+			label: 'Play ' + item.title,
 			bank: {
 				style: 'text',
 				text: item.title,
 				size: '14',
 				color: '16777215',
-				bgcolor: "#000000",
+				bgcolor: '#000000',
 			},
-			actions: [{
-				action: 'play_ID',
-				options: {
-					id: item.itemID,
-				}
-			}]
+			actions: [
+				{
+					action: 'play_ID',
+					options: {
+						id: item.itemID,
+					},
+				},
+			],
 		}
 	})
 }
 /**
  * this function will get the Rundown JSON from a new rundown/get api
- * @param {String} host 
- * @param {Integer} port 
+ * @param {String} host
+ * @param {Integer} port
  * @returns the rundown Items with id and title or []
  */
 module.exports.getRundown = async function (host, port) {
 	try {
 		const response = await fetch(`http://${host}:${port}/api/v1/rundown/get`)
-		const rundown = await response.json();
+		const rundown = await response.json()
 		return convertRundown(rundown)
-	}
-	catch (error){
+	} catch (error) {
 		// we might add error handling if the Rundown Feature is in use a lot.
 	}
 	return []
@@ -154,23 +150,23 @@ module.exports.getRundown = async function (host, port) {
  * this function converts the Rundown to only itemID and title
  * this will help to add more advanced methods
  * to decide how to create the title form the fields
- * @param {RundownObject} rundown 
+ * @param {RundownObject} rundown
  * @returns an array of {itemID: String, title: String}
  */
 function convertRundown(rundown) {
-	if(rundown["templates"] == undefined){
+	if (rundown['templates'] == undefined) {
 		return []
 	}
 	const templates = rundown.templates.filter((template) => {
-		return template.out == "manual"
+		return template.out == 'manual'
 	})
 	const ret = templates.map((template) => {
 		const fields = template.DataFields.filter((field) => {
-			return field.ftype == "textfield"
+			return field.ftype == 'textfield'
 		})
 		return {
 			itemID: template.itemID,
-			title: fields[0].value
+			title: fields[0].value,
 		}
 	})
 	return ret

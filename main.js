@@ -79,5 +79,4 @@ class ModuleInstance extends InstanceBase {
 	}
 }
 
-
 runEntrypoint(ModuleInstance, UpgradeScripts)

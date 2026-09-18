@@ -1,16 +1,16 @@
 module.exports = {
 	// Define and expose available actions to SPX
 	initActions: function () {
-		let self = this;
-		let actions = {};
+		let self = this
+		let actions = {}
 
 		actions.play = {
-			name: "Start focused item",
+			name: 'Start focused item',
 			options: [],
 			callback: function (action) {
 				self.doAction(action)
-			}
-		};
+			},
+		}
 
 		actions.play_ID = {
 			name: 'Start item by ID',
@@ -24,9 +24,8 @@ module.exports = {
 			],
 			callback: function (action) {
 				self.doAction(action)
-			}
-		};
-
+			},
+		}
 
 		actions.continue = {
 			name: 'Continue focused item',
@@ -128,7 +127,6 @@ module.exports = {
 				self.doAction(action)
 			},
 		}
-
 
 		actions.controlRundownItem = {
 			name: 'Play/Stop/Continue an item from a known rundown',
@@ -241,7 +239,7 @@ module.exports = {
 			},
 		}
 
-		self.setActionDefinitions(actions);
+		self.setActionDefinitions(actions)
 	},
 
 	// Select action and make API call
@@ -311,7 +309,7 @@ module.exports = {
 				cmd = `http://${this.config.host}:${this.config.port}/api/v1/controlRundownItemByID?file=${opt.file}&item=${opt.id}&command=${opt.command}`
 				break
 		}
-		console.log(cmd);
+		console.log(cmd)
 		if (cmd != undefined) {
 			switch (method) {
 				case 'GET':
@@ -334,5 +332,5 @@ module.exports = {
 					break
 			}
 		}
-	}
+	},
 }
