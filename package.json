@@ -1,9 +1,14 @@
 {
-	"name": "spx-grapics-controller",
-	"version": "2.0.0",
+	"name": "spx-graphics-controller",
+	"version": "2.0.1",
 	"main": "./main.js",
+	"type": "commonjs",
 	"scripts": {
-		"format": "prettier -w ."
+		"format": "prettier -w .",
+		"lint": "prettier --check .",
+		"test": "node --test src/__tests__/*.unit.test.js",
+		"test:integration": "node --test src/__tests__/integration.spx.test.js",
+		"build": "companion-module-build"
 	},
 	"license": "MIT",
 	"repository": {
@@ -11,8 +16,7 @@
 		"url": "git+https://github.com/bitfocus/companion-module-spx-graphics-controller.git"
 	},
 	"dependencies": {
-		"@companion-module/base": "~1.4.0",
-		"yarn": "^1.22.19"
+		"@companion-module/base": "~1.14.0"
 	},
 	"devDependencies": {
 		"@companion-module/tools": "^2.8.0"

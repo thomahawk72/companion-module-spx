@@ -1,0 +1,9 @@
+node_modules/
+pkg/
+.verify/
+.agentteam/
+graphify-out/
+Docs/
+LICENSE
+yarn.lock
+package-lock.json
